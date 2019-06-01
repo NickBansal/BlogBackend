@@ -28,7 +28,8 @@ describe('/', () => {
 			return request.get('/wrongurl')
 				.expect(404)
 				.then(res => {
-					expect(res.body.msg).to.equal('/api/wrongurl does not exist');
+					console.log(res);
+					expect(res.body.msg).to.equal('/wrongurl does not exist');
 				});
 		});
 	});

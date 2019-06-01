@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const DB_URL = require('./config');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const { handle404, handle400, handle500 } = require('./error-handlers');
 const APIrouter = require('./routes/APIrouter');
 
 mongoose.connect(DB_URL, { useNewUrlParser: true })
@@ -13,8 +14,11 @@ mongoose.connect(DB_URL, { useNewUrlParser: true })
 app.set('view engine', 'ejs');
 app.use(cors());
 app.use(express.static('public'), bodyParser.json());
-app.use('/', APIrouter);
 
+app.use('/', APIrouter);
 app.use('/*', (req, res, next) => next({ status: 404, msg: `${req.originalUrl} does not exist` }));
+app.use(handle404);
+app.use(handle400); // Bad request
+app.use(handle500);
 
 module.exports = app;
