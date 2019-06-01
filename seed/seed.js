@@ -9,7 +9,7 @@ const seedDB = blogsData => {
 			const blogRaw = Blogs.insertMany(blogsData);
 			return Promise.all([blogRaw]);
 		})
-		.then(blogsDocs => blogsDocs)
+		.then(([blogsDocs]) => [blogsDocs])
 		.catch(console.log);
 };
 
