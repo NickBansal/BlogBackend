@@ -1,17 +1,19 @@
 /* eslint-disable no-console */
 /* eslint-disable no-undef */
-process.env.NODE_ENV = 'test';
+// const { test } = require('../config');
+const DB_URL = require('../config');
 const app = require('../');
 const request = require('supertest')(app);
-const seedDB = require('../seed/seed');
+const mongoose = require('mongoose');
 const { expect } = require('chai');
+const seedDB = require('../seed/seed');
 const blogs = require('../seed/testData');
 
 describe('/', () => {
 	let blogsDocs;
 	beforeEach(() => {
-		return seedDB(blogs)
-			.then(docs => [blogsDocs] = docs)
+		mongoose.connect(DB_URL, { useNewUrlParser: true })
+			.then(() => seedDB(blogs))
 			.catch(console.log);
 	});
 	after(() => mongoose.disconnect());
@@ -19,6 +21,16 @@ describe('/', () => {
 	it('returns a 200 on the API route page', () => {
 		return request.get('/')
 			.expect(200);
+	});
+
+	describe('/wrongurl', () => {
+		it('GET returns 404 error when passed a wrong url', () => {
+			return request.get('/wrongurl')
+				.expect(404)
+				.then(res => {
+					expect(res.body.msg).to.equal('/api/wrongurl does not exist');
+				});
+		});
 	});
 });
 

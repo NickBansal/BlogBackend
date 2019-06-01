@@ -15,4 +15,6 @@ app.use(cors());
 app.use(express.static('public'), bodyParser.json());
 app.use('/', APIrouter);
 
+app.use('/*', (req, res, next) => next({ status: 404, msg: `${req.originalUrl} does not exist` }));
+
 module.exports = app;

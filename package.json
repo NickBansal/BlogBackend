@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nodemon listen.js",
     "seed": "node seed/seed-dev.js",
-    "test": "mocha __tests__/index.js"
+    "test": "mocha __tests__/index.js --watch"
   },
   "keywords": [],
   "author": "",
