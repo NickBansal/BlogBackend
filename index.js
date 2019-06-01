@@ -1,14 +1,16 @@
-const express = require('app');
+/* eslint-disable no-console */
+const express = require('express');
 const app = express();
-const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const DB_URL = require('./config');
+const bodyParser = require('body-parser');
+const cors = require('cors');
 
 mongoose.connect(DB_URL, { useNewUrlParser: true })
 	.then(console.log(`Database is running on ${DB_URL}`));
 
 app.set('view engine', 'ejs');
-app.use(express.static('public'));
-app.use(bodyParser.json());
+app.use(cors());
+app.use(express.static('public'), bodyParser.json());
 
-module.export = app;
+module.exports = app;
