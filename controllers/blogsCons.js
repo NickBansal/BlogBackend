@@ -31,3 +31,13 @@ exports.postNewBlog = (req, res, next) => {
 		.then(blog => res.send(blog))
 		.catch(next);
 };
+
+exports.deleteBlogById = (req, res, next) => {
+	const { blog_id } = req.params;
+	Blogs.findByIdAndRemove(blog_id)
+		.then(deleted => {
+			if (!deleted) return Promise.reject({ status: 400, msg: `${blog_id} has no associated blogs` });
+			res.status(204).send([]);
+		})
+		.catch(next);
+};
