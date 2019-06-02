@@ -17,6 +17,17 @@ exports.sendBlogById = (req, res, next) => {
 			.lean()
 			.exec()
 	])
-		.then(blogs => res.send(blogs))
+		.then(blog => {
+			if (!blog) return Promise.reject({ status: 400, msg: 'Blog not found' });
+			res.status(200).send(blog);
+		})
+		.catch(next);
+
+};
+
+exports.postNewBlog = (req, res, next) => {
+	const { body, title, image } = req.body;
+	Blogs.create({ body, title, image })
+		.then(blog => res.send(blog))
 		.catch(next);
 };

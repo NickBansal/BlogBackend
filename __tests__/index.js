@@ -14,7 +14,9 @@ describe('/', () => {
 	beforeEach(() => {
 		mongoose.connect(DB_URL, { useNewUrlParser: true })
 			.then(() => seedDB(blogs))
-			.then(docs => [blogsDocs] = docs)
+			.then(docs => {
+				blogsDocs = docs;
+			})
 			.catch(console.log);
 	});
 	after(() => mongoose.disconnect());
@@ -39,16 +41,21 @@ describe('/', () => {
 			return request.get('/blogs')
 				.expect(200);
 		});
-
 		describe('/blogs/:blog_id', () => {
-			it('GET returns 404 when passed a wrong blog id', () => {
+			it('GET returns a 400 for a wrong blog id', () => {
 				return request.get('/blogs/wrong_id')
 					.expect(400)
 					.then(res => {
 						expect(res.body.msg).to.equal('Bad request');
 					});
 			});
+			it('GET returns a 200 for a correct blog id', () => {
+				return request.get(`/blogs/${blogsDocs[0][0].id}`)
+					.expect(200);
+			});
 		});
 	});
+
+
 });
 

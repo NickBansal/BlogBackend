@@ -1,9 +1,10 @@
 const blogsRouter = require('express').Router();
-const { sendAllBlogs, sendBlogById } = require('../controllers/blogsCons');
+const { sendAllBlogs, sendBlogById, postNewBlog } = require('../controllers/blogsCons');
 
 blogsRouter
 	.route('/')
-	.get(sendAllBlogs);
+	.get(sendAllBlogs)
+	.post(postNewBlog);
 
 blogsRouter
 	.route('/:blog_id')
