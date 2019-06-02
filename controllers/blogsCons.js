@@ -41,3 +41,17 @@ exports.deleteBlogById = (req, res, next) => {
 		})
 		.catch(next);
 };
+
+exports.editCurrentBlog = (req, res, next) => {
+	const { blog_id } = req.params;
+	Blogs.findByIdAndUpdate(blog_id, { ...req.body })
+		.then(blog => {
+			res.send(blog);
+			res.redirect(`/blogs/${blog_id}`);
+		})
+		.catch(() => {
+			res.redirect('/blogs');
+			next();
+		});
+
+};

@@ -18,7 +18,7 @@ app.use(express.static('public'), bodyParser.json());
 app.use('/', APIrouter);
 app.use('/*', (req, res, next) => next({ status: 404, msg: `${req.originalUrl} does not exist` }));
 app.use(handle404);
-app.use(handle400); // Bad request
+app.use(handle400);
 app.use(handle500);
 
 module.exports = app;

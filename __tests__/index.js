@@ -79,8 +79,15 @@ describe('/', () => {
 			return request.get(`/blogs/${blogsDocs[0][0].id}`)
 				.expect(200);
 		});
+		it('GET returns a 200 for a correct blog id', () => {
+			return request.delete(`/blogs/${blogsDocs[0][0].id}`)
+				.expect(200);
+		});
+
+		it('GET returns a 400 for an incorrect blog id', () => {
+			return request.delete('/blogs/wrong_id')
+				.expect(400);
+		});
 	});
-
-
 });
 

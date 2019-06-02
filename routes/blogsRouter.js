@@ -1,5 +1,5 @@
 const blogsRouter = require('express').Router();
-const { sendAllBlogs, sendBlogById, postNewBlog, deleteBlogById } = require('../controllers/blogsCons');
+const { sendAllBlogs, sendBlogById, postNewBlog, deleteBlogById, editCurrentBlog } = require('../controllers/blogsCons');
 
 blogsRouter
 	.route('/')
@@ -9,6 +9,7 @@ blogsRouter
 blogsRouter
 	.route('/:blog_id')
 	.get(sendBlogById)
-	.delete(deleteBlogById);
+	.delete(deleteBlogById)
+	.put(editCurrentBlog);
 
 module.exports = blogsRouter;
