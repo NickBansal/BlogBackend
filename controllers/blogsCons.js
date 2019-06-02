@@ -47,10 +47,6 @@ exports.editCurrentBlog = (req, res, next) => {
 	Blogs.findByIdAndUpdate(blog_id, { ...req.body }, { useFindAndModify: false })
 		.then(blog => {
 			res.send(blog);
-			res.redirect(`/blogs/${blog_id}`);
 		})
-		.catch(() => {
-			res.redirect('/blogs');
-			next();
-		});
+		.catch(next);
 };
