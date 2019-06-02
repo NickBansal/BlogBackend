@@ -13,10 +13,6 @@ const APIrouter = require('./routes/APIrouter');
 mongoose.connect(DB_URL, { useNewUrlParser: true })
 	.then(console.log(`Database is running on ${DB_URL}`));
 
-if (process.env.NODE_ENV === 'production') {
-	//set static folder
-	app.use(express.static('client/build'));
-}
 
 app.set('view engine', 'ejs');
 app.use(cors());
