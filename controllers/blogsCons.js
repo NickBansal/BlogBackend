@@ -26,8 +26,7 @@ exports.sendBlogById = (req, res, next) => {
 };
 
 exports.postNewBlog = (req, res, next) => {
-	const { body, title, image } = req.body;
-	Blogs.create({ body, title, image })
+	Blogs.create({ ...req.body })
 		.then(blog => res.send(blog))
 		.catch(next);
 };
