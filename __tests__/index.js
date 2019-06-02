@@ -14,6 +14,7 @@ describe('/', () => {
 	beforeEach(() => {
 		mongoose.connect(DB_URL, { useNewUrlParser: true })
 			.then(() => seedDB(blogs))
+			.then(docs => [blogsDocs] = docs)
 			.catch(console.log);
 	});
 	after(() => mongoose.disconnect());
