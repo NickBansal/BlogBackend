@@ -34,7 +34,7 @@ exports.postNewBlog = (req, res, next) => {
 
 exports.deleteBlogById = (req, res, next) => {
 	const { blog_id } = req.params;
-	Blogs.findByIdAndRemove(blog_id)
+	Blogs.findByIdAndRemove(blog_id, { useFindAndModify: false })
 		.then(deleted => {
 			if (!deleted) return Promise.reject({ status: 400, msg: `${blog_id} has no associated blogs` });
 			res.status(204).send([]);
@@ -44,7 +44,7 @@ exports.deleteBlogById = (req, res, next) => {
 
 exports.editCurrentBlog = (req, res, next) => {
 	const { blog_id } = req.params;
-	Blogs.findByIdAndUpdate(blog_id, { ...req.body })
+	Blogs.findByIdAndUpdate(blog_id, { ...req.body }, { useFindAndModify: false })
 		.then(blog => {
 			res.send(blog);
 			res.redirect(`/blogs/${blog_id}`);
@@ -53,5 +53,4 @@ exports.editCurrentBlog = (req, res, next) => {
 			res.redirect('/blogs');
 			next();
 		});
-
 };

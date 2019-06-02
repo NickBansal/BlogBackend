@@ -1,7 +1,6 @@
 /* eslint-disable no-console */
 /* eslint-disable no-undef */
-// const { test } = require('../config');
-const DB_URL = require('../config');
+process.env.NODE_ENV = 'test';
 const app = require('../');
 const request = require('supertest')(app);
 const mongoose = require('mongoose');
@@ -12,8 +11,7 @@ const blogs = require('../seed/testData');
 describe('/', () => {
 	let blogsDocs;
 	beforeEach(() => {
-		mongoose.connect(DB_URL, { useNewUrlParser: true })
-			.then(() => seedDB(blogs))
+		return seedDB(blogs)
 			.then(docs => {
 				blogsDocs = docs;
 			})
