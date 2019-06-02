@@ -1,4 +1,6 @@
 /* eslint-disable no-console */
+// eslint-disable-next-line no-undef
+process.env.NODE_ENV = 'production';
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
