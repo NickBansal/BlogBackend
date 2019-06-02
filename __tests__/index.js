@@ -41,18 +41,43 @@ describe('/', () => {
 			return request.get('/blogs')
 				.expect(200);
 		});
-		describe('/blogs/:blog_id', () => {
-			it('GET returns a 400 for a wrong blog id', () => {
-				return request.get('/blogs/wrong_id')
-					.expect(400)
-					.then(res => {
-						expect(res.body.msg).to.equal('Bad request');
-					});
-			});
-			it('GET returns a 200 for a correct blog id', () => {
-				return request.get(`/blogs/${blogsDocs[0][0].id}`)
-					.expect(200);
-			});
+		it('POST returns a new object and 200 status', () => {
+			return request.post('/blogs')
+				.send({
+					title: 'new article',
+					body: 'This is my new article content',
+					image: 'image.jpg'
+				})
+				.expect(200)
+				.then(res => {
+					expect(res.body).to.have.property('image');
+					expect(res.body).to.be.an('object');
+					expect(res.body.title).to.equal('new article');
+					expect(res.body.body).to.equal('This is my new article content');
+				});
+		});
+		it('POST returns an error when post fields are missing', () => {
+			return request.post('/blogs')
+				.send({
+					title: 'new article'
+				})
+				.expect(400)
+				.then(res => {
+					expect(res.body.msg).to.equal('Bad request');
+				});
+		});
+	});
+	describe('/blogs/:blog_id', () => {
+		it('GET returns a 400 for a wrong blog id', () => {
+			return request.get('/blogs/wrong_id')
+				.expect(400)
+				.then(res => {
+					expect(res.body.msg).to.equal('Bad request');
+				});
+		});
+		it('GET returns a 200 for a correct blog id', () => {
+			return request.get(`/blogs/${blogsDocs[0][0].id}`)
+				.expect(200);
 		});
 	});
 
