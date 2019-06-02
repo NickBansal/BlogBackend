@@ -19,7 +19,7 @@ describe('/', () => {
 	});
 	after(() => mongoose.disconnect());
 
-	it('returns a 200 on the API route page', () => {
+	it('returns a 200 on the route page', () => {
 		return request.get('/')
 			.expect(200);
 	});
@@ -29,9 +29,25 @@ describe('/', () => {
 			return request.get('/wrongurl')
 				.expect(404)
 				.then(res => {
-					console.log(res);
 					expect(res.body.msg).to.equal('/wrongurl does not exist');
 				});
+		});
+	});
+
+	describe('/blogs', () => {
+		it('GET return a 200 on the blogs route', () => {
+			return request.get('/blogs')
+				.expect(200);
+		});
+
+		describe('/blogs/:blog_id', () => {
+			it('GET returns 404 when passed a wrong blog id', () => {
+				return request.get('/blogs/wrong_id')
+					.expect(400)
+					.then(res => {
+						expect(res.body.msg).to.equal('Bad request');
+					});
+			});
 		});
 	});
 });
