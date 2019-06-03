@@ -18,7 +18,9 @@ exports.sendBlogById = (req, res, next) => {
 			.exec()
 	])
 		.then(blog => {
-			if (!blog) return Promise.reject({ status: 400, msg: 'Blog not found' });
+			if (blog[0] === null) {
+				return Promise.reject({ status: 400, msg: 'Blog not found' });
+			}
 			res.status(200).send(blog);
 		})
 		.catch(next);
