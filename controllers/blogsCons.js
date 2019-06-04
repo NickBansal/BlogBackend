@@ -37,7 +37,7 @@ exports.deleteBlogById = (req, res, next) => {
 	const { blog_id } = req.params;
 	Blogs.findByIdAndRemove(blog_id, { useFindAndModify: false })
 		.then(deleted => {
-			if (!deleted) return Promise.reject({ status: 400, msg: `${blog_id} has no associated blogs` });
+			if (typeof deleted !== 'object') return Promise.reject({ status: 400, msg: `${blog_id} has no associated blogs` });
 			res.status(204).send([]);
 		})
 		.catch(next);
