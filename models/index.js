@@ -8,7 +8,8 @@ const blogSchema = new Schema({
 	},
 	body: { type: String, required: true },
 	created: { type: Date, default: Date.now },
-	label: { type: String, required: true }
+	label: { type: String, required: true },
+	edited: { type: Boolean, default: false }
 });
 
 module.exports = model('Blog', blogSchema);

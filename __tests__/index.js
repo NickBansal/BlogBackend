@@ -80,7 +80,7 @@ describe('/', () => {
 		});
 
 		it('GET returns a 400 for an incorrect blog id', () => {
-			return request.delete('/blogs/41')
+			return request.delete('/blogs/41hfhfg55')
 				.expect(400)
 				.then(res => {
 					expect(res.body.msg).to.equal('Bad request');
