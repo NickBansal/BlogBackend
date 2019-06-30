@@ -53,6 +53,7 @@ describe('/', () => {
 					expect(res.body).to.be.an('object');
 					expect(res.body.title).to.equal('new article');
 					expect(res.body.body).to.equal('This is my new article content');
+					expect(res.body.label).to.equal('randomLabel');
 				});
 		});
 		it('POST returns an error when post fields are missing', () => {
