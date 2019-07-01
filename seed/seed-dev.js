@@ -1,4 +1,5 @@
 /* eslint-disable no-console */
+// eslint-disable-next-line no-undef
 process.env.NODE_ENV = 'production';
 const seedDB = require('./seed');
 const mongoose = require('mongoose');
