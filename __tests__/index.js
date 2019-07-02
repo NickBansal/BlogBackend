@@ -45,7 +45,7 @@ describe('/', () => {
 					title: 'new article',
 					body: 'This is my new article content',
 					image: 'image.jpg',
-					label: 'randomLabel'
+					category: 'randomLabel'
 				})
 				.expect(200)
 				.then(res => {
@@ -53,7 +53,7 @@ describe('/', () => {
 					expect(res.body).to.be.an('object');
 					expect(res.body.title).to.equal('new article');
 					expect(res.body.body).to.equal('This is my new article content');
-					expect(res.body.label).to.equal('randomLabel');
+					expect(res.body.category).to.equal('randomLabel');
 				});
 		});
 		it('POST returns an error when post fields are missing', () => {
@@ -75,7 +75,7 @@ describe('/', () => {
 					expect(res.body.msg).to.equal('Blog not found');
 				});
 		});
-		it('GET returns a 200 for a correct blog id', () => {
+		it('GET returns a 204 for a correct blog id', () => {
 			return request.delete(`/blogs/${blogsDocs[0].id}`)
 				.expect(204);
 		});

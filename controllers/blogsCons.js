@@ -29,7 +29,9 @@ exports.sendBlogById = (req, res, next) => {
 
 exports.postNewBlog = (req, res, next) => {
 	Blogs.create({ ...req.body })
-		.then(blog => res.send(blog))
+		.then(blog => {
+			res.send(blog);
+		})
 		.catch(next);
 };
 
@@ -45,7 +47,7 @@ exports.deleteBlogById = (req, res, next) => {
 
 exports.editCurrentBlog = (req, res, next) => {
 	const { blog_id } = req.params;
-	Blogs.findByIdAndUpdate(blog_id, { edited: true, ...req.body }, { useFindAndModify: false })
+	Blogs.findByIdAndUpdate(blog_id, { ...req.body, edited: true }, { useFindAndModify: false })
 		.then(blog => {
 			res.send(blog);
 		})
