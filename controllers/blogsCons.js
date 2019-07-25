@@ -1,4 +1,5 @@
 const Blogs = require('../models');
+const fs = require('fs');
 
 exports.sendAllBlogs = (req, res, next) => {
 	return Promise.all([
@@ -28,7 +29,9 @@ exports.sendBlogById = (req, res, next) => {
 };
 
 exports.postNewBlog = (req, res, next) => {
-	Blogs.create({ ...req.body, image: req.file.path })
+	const image = fs.readFileSync(req.file.path, { encoding: 'base64' });
+	console.log(image);
+	Blogs.create({ ...req.body, image })
 		.then(blog => {
 			res.send(blog);
 		})
