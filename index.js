@@ -16,7 +16,8 @@ mongoose.connect(DB_URL, { useNewUrlParser: true })
 
 app.set('view engine', 'ejs');
 app.use(cors());
-app.use(express.static('public'), bodyParser.json());
+app.use('/uploads', express.static('uploads'));
+app.use(bodyParser.json());
 
 app.use('/', APIrouter);
 
