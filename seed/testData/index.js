@@ -3,7 +3,6 @@ const fs = require('fs');
 
 const base64 = (path) => fs.readFileSync(path, { encoding: 'base64' });
 
-
 module.exports = [
 	{
 		'title': 'Living in the shadow of a great man',
