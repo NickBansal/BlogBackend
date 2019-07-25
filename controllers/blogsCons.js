@@ -29,6 +29,7 @@ exports.sendBlogById = (req, res, next) => {
 };
 
 exports.postNewBlog = (req, res, next) => {
+	console.log(req.file);
 	const image = fs.readFileSync(req.file.path, { encoding: 'base64' });
 	Blogs.create({ ...req.body, image })
 		.then(blog => {
