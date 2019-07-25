@@ -47,7 +47,7 @@ exports.deleteBlogById = (req, res, next) => {
 
 exports.editCurrentBlog = (req, res, next) => {
 	const { blog_id } = req.params;
-	Blogs.findByIdAndUpdate(blog_id, { ...req.body, edited: true })
+	Blogs.findByIdAndUpdate(blog_id, { ...req.body, edited: true, created: Date.now() })
 		.then(blog => {
 			res.send(blog);
 		})
