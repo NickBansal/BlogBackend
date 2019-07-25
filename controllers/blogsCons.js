@@ -28,6 +28,7 @@ exports.sendBlogById = (req, res, next) => {
 };
 
 exports.postNewBlog = (req, res, next) => {
+	console.log(req.file);
 	Blogs.create({ ...req.body })
 		.then(blog => {
 			res.send(blog);
