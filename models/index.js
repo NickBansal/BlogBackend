@@ -3,9 +3,7 @@ const { Schema, model } = mongoose;
 
 const blogSchema = new Schema({
 	title: { type: String, required: true },
-	image: {
-		type: String, default: 'https://cdn.apk-cloud.com/detail/screenshot/CywQtHxkh92amMh2GbEKKMRaJhJYMEFQpTkCNUXTmP17vzEVitphRBYFB3WvqV2D9Lsw=h900.png'
-	},
+	image: { type: String },
 	body: { type: String, required: true },
 	created: { type: Date, default: Date.now },
 	category: { type: String, required: true },

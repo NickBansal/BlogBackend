@@ -11,7 +11,18 @@ const storage = multer.diskStorage({
 	},
 });
 
-const upload = multer({ storage });
+const fileFilter = (req, file, cb) => {
+	if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
+		cb(null, true);
+	}
+	cb(null, false);
+};
+
+const upload = multer({
+	storage,
+	limits: { fileSize: 1024 * 1024 },
+	fileFilter
+});
 
 blogsRouter
 	.route('/')
