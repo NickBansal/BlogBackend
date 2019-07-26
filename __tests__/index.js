@@ -8,6 +8,8 @@ const { expect } = require('chai');
 const seedDB = require('../seed/seed');
 const blogs = require('../seed/testData');
 
+let testFilePath = null;
+
 describe('/', () => {
 	let blogsDocs;
 	beforeEach(() => {
@@ -44,7 +46,7 @@ describe('/', () => {
 		it('POST returns a new object and 200 status', (done) => {
 			return request.post('/blogs')
 				.field('Content-Type', 'multipart/form-data')
-				.attach('postImage', '../uploads/willhaywoodhound_700.jpg')
+				.attach('postImage', `${__dirname}/images/test-image.png`)
 				.end((err, res) => {
 					if (err) {
 						console.log(err);
