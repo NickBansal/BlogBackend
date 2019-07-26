@@ -44,7 +44,7 @@ describe('/', () => {
 		it('POST returns a new object and 200 status', (done) => {
 			return request.post('/blogs')
 				.field('Content-Type', 'multipart/form-data')
-				.attach('productImage', 'uploads/willhaywoodhound_700.jpg')
+				.attach('postImage', '../uploads/willhaywoodhound_700.jpg')
 				.end((err, res) => {
 					if (err) {
 						console.log(err);
