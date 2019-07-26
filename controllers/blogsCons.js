@@ -35,7 +35,6 @@ exports.postNewBlog = (req, res, next) => {
 			res.send(blog);
 		})
 		.catch(next);
-
 };
 
 exports.deleteBlogById = (req, res, next) => {

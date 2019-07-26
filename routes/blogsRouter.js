@@ -15,7 +15,7 @@ const fileFilter = (req, file, cb) => {
 	if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
 		cb(null, true);
 	}
-	cb('Filetype not supported', true);
+	cb(null, false);
 };
 
 const upload = multer({
