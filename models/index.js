@@ -3,7 +3,7 @@ const { Schema, model } = mongoose;
 
 const blogSchema = new Schema({
 	title: { type: String, required: true },
-	image: { type: String },
+	image: { type: String, required: true },
 	body: { type: String, required: true },
 	created: { type: Date, default: Date.now },
 	category: { type: String, required: true },
