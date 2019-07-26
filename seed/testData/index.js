@@ -26,6 +26,6 @@ module.exports = [
 		'title': 'UNCOVERED: catspiracy to bring down democracy',
 		'body': dummy.body2,
 		'category': 'Lions',
-		'image': base64('uploads/willhaywoodshares1_700.jpg')
+		'image': base64('uploads/willhaywoodhound_700.jpg')
 	}
 ];

@@ -34,17 +34,17 @@ describe('/', () => {
 		});
 	});
 
-	describe('/blogs', () => {
+	describe.only('/blogs', () => {
 		it('GET return a 200 on the blogs route', () => {
 			return request.get('/blogs')
 				.expect(200);
 		});
-		it('POST returns a new object and 200 status', () => {
+		it.skip('POST returns a new object and 200 status', () => {
 			return request.post('/blogs')
 				.send({
 					title: 'new article',
 					body: 'This is my new article content',
-					image: 'image.jpg',
+					productImage: form,
 					category: 'randomLabel'
 				})
 				.expect(200)
@@ -55,6 +55,14 @@ describe('/', () => {
 					expect(res.body.body).to.equal('This is my new article content');
 					expect(res.body.category).to.equal('randomLabel');
 				});
+		});
+		it('POST returns a new object and 200 status', () => {
+			return request.post('/blogs')
+				.attach('productImage', 'uploads/willhaywoodhound_700.jpg')
+				.then(res => {
+					expect(res.body).to.have.property('image');
+				});
+
 		});
 		it('POST returns an error when post fields are missing', () => {
 			return request.post('/blogs')
